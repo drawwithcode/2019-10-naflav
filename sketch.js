@@ -24,8 +24,9 @@ let video;
 var state = 0;
 var state2 = 0;
 var boom, boomx, boomy = 0;
-function preload(){
- //louding 3d models and song
+
+function preload() {
+  //louding 3d models and song
   face = loadModel('faceMesh.obj', true);
   mySound = loadSound('song1.mp3');
   video = createVideo('video3.mp4');
@@ -35,7 +36,7 @@ function preload(){
 
 
 
-  }
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
@@ -49,7 +50,7 @@ function setup() {
   live.fill(255);
   live.textAlign(CENTER);
   live.textSize(25);
-  live.text('E.C.C.O',100,100,200,100);
+  live.text('E.C.C.O', 100, 100, 200, 100);
 
   live.text('LOST DREAMS SOUNDS ', 150, 150);
   //create text rotating on screen
@@ -58,7 +59,7 @@ function setup() {
   love.textAlign(CENTER);
   love.textSize(18);
   love.text('PRESS THE UPPER&LEFT ARROW ', 170, 260);
- //points on the 4d cube
+  //points on the 4d cube
   rotateX(40);
   ponts[0] = create4dVector(-1, -1, -1, 1);
   ponts[1] = create4dVector(1, -1, -1, 1);
@@ -104,19 +105,19 @@ function draw() {
 
   //map mouse to background color
   background(
-     map(mouseX, 0, width, maxColorValue, minColorValue),
-     map(mouseY, 0, height, 80, minColorValue),
-     map(mouseX, 0, height, minColorValue, maxColorValue)
-   );
+    map(mouseX, 0, width, maxColorValue, minColorValue),
+    map(mouseY, 0, height, 80, minColorValue),
+    map(mouseX, 0, height, minColorValue, maxColorValue)
+  );
 
   order = [a, b];
   noStroke();
   //map ambient light to mouse
   ambientLight(map(mouseX, 0, width, maxColorValue, minColorValue),
-  map(mouseY, 0, height, maxColorValue, minColorValue),
-  map(mouseX, 0, height, minColorValue, maxColorValue));
+    map(mouseY, 0, height, maxColorValue, minColorValue),
+    map(mouseX, 0, height, minColorValue, maxColorValue));
   //map point light to mouseX
-  pointLight(255,255,255);
+  pointLight(255, 255, 255);
   for (let i = 0; i < ponts.length; i++) {
     let p = ponts[i];
     let pt = Matrix.fromVec(p);
@@ -134,65 +135,65 @@ function draw() {
 
     projected[i] = (pt);
     //Change the permutation order
-    if (state2 == 0){
+    if (state2 == 0) {
       a = 1;
       b = 4;
-    }else if (state2 == 1) {
+    } else if (state2 == 1) {
       a = 2;
       b = 4;
-    }else if (state2 == 2) {
+    } else if (state2 == 2) {
       a = 4;
       b = 5;
-    }else if (state2 == 3) {
+    } else if (state2 == 3) {
       a = 3;
       b = 4;
     }
-     directionalLight(18, 20, 18, 200, -4000, -100)
-// draw the spheres
-if (state == 0) {
-    push();
-    translate(pt.x, pt.y, pt.z);
-    translate(0,-200,0);
+    directionalLight(18, 20, 18, 200, -4000, -100)
+    // draw the spheres
+    if (state == 0) {
+      push();
+      translate(pt.x, pt.y, pt.z);
+      translate(0, -200, 0);
 
-    ballcolor = map(mouseY, 0, height, maxColorValue, minColorValue);
-    ambientMaterial(ballcolor);
-    sphere(5);
-    pop();
-  } else if (state == 1) {
-    //shake the balls
-    push();
-    translate(pt.x, pt.y, pt.z);
-    translate(boomx,-200,boomy);
-    ballcolor = map(mouseY, 0, height, maxColorValue, minColorValue);
-    ambientMaterial(ballcolor);
-    sphere(5);
-    boom = random(0,10);
-    boomx = random(0,15);
-    boomy = random(0,5);
-    pop();
-  } else if (state == 2) {
-    push();
-    translate(pt.x, pt.y, pt.z);
-    translate(boomx,-200,boomy);
-    ballcolor = map(mouseY, 0, height, maxColorValue, minColorValue);
-    ambientMaterial(ballcolor);
-    sphere(5);
-    boom = random(0,1000);
-    boomx = random(0,150);
-    boomy = random(0,50);
-    pop();
-  }else if (state == 3) {
-    //make the spheres go away
-    push()
-    translate(pt.x+boomx, pt.y+boomy, pt.z+boom);
-    ballcolor = map(mouseY, 0, height, maxColorValue, minColorValue);
-    ambientMaterial(ballcolor);
-    sphere(5);
-    boom = boom+1;
+      ballcolor = map(mouseY, 0, height, maxColorValue, minColorValue);
+      ambientMaterial(ballcolor);
+      sphere(5);
+      pop();
+    } else if (state == 1) {
+      //shake the balls
+      push();
+      translate(pt.x, pt.y, pt.z);
+      translate(boomx, -200, boomy);
+      ballcolor = map(mouseY, 0, height, maxColorValue, minColorValue);
+      ambientMaterial(ballcolor);
+      sphere(5);
+      boom = random(0, 10);
+      boomx = random(0, 15);
+      boomy = random(0, 5);
+      pop();
+    } else if (state == 2) {
+      push();
+      translate(pt.x, pt.y, pt.z);
+      translate(boomx, -200, boomy);
+      ballcolor = map(mouseY, 0, height, maxColorValue, minColorValue);
+      ambientMaterial(ballcolor);
+      sphere(5);
+      boom = random(0, 1000);
+      boomx = random(0, 150);
+      boomy = random(0, 50);
+      pop();
+    } else if (state == 3) {
+      //make the spheres go away
+      push()
+      translate(pt.x + boomx, pt.y + boomy, pt.z + boom);
+      ballcolor = map(mouseY, 0, height, maxColorValue, minColorValue);
+      ambientMaterial(ballcolor);
+      sphere(5);
+      boom = boom + 1;
 
-    boomx = boomx+1;
-    boomy = boomy+0.3;
-    pop();
+      boomx = boomx + 1;
+      boomy = boomy + 0.3;
+      pop();
     }
   }
   //control the movement of the 4d cube with the mouseX
@@ -201,7 +202,7 @@ if (state == 0) {
 
 
   fill(250, 0, 0);
- //connect the 4d spheres
+  //connect the 4d spheres
   for (let i = 0; i < 4; i++) {
     connect(0, i, (i + 1) % 4, projected);
     connect(0, i + 4, ((i + 1) % 4) + 4, projected);
@@ -217,18 +218,18 @@ if (state == 0) {
   for (let i = 0; i < 8; i++) {
     connect(0, i, i + 8, projected);
   }
-//video
-  translate(00,0,-2000);
-  ambientMaterial(255,0,0);
+  //video
+  translate(00, 0, -2000);
+  ambientMaterial(255, 0, 0);
   noStroke();
   texture(video);
-  plane(windowWidth*4,windowHeight*4);
+  plane(windowWidth * 4, windowHeight * 4);
 
   normalMaterial(255);
-  translate(-1000,0,1400);
+  translate(-1000, 0, 1400);
   //rotateX(angle*2);
   texture(live);
-  plane(300,100);
+  plane(300, 100);
 
 
 
@@ -236,22 +237,22 @@ if (state == 0) {
   //face
   //rotateX(-angle*2);
 
-  scale(10,10,2);
-  translate(100,-5,-600);
-  ambientMaterial(255,255,255);
+  scale(10, 10, 2);
+  translate(100, -5, -600);
+  ambientMaterial(255, 255, 255);
   rotateZ(radians(180));
   model(face);
   //box rotating with text
-  translate(-100,0,200)
-  normalMaterial(255,0,255)
+  translate(-100, 0, 200)
+  normalMaterial(255, 0, 255)
   rotateY(angle * 0.3);
   rotateZ(angle * 0.7);
   rotateX(angle * 20);
-  angle = angle+0.002;
+  angle = angle + 0.002;
   texture(love);
-  translate(00,10,0);
+  translate(00, 10, 0);
   strokeWeight(2);
-   box(100);
+  box(100);
 
 }
 
@@ -260,21 +261,21 @@ function connect(offset, i, j, ponts) {
   stroke(255);
   const a = ponts[i + offset];
   const b = ponts[j + offset];
-  line(a.x, a.y-200, a.z, b.x, b.y-200, b.z);
+  line(a.x, a.y - 200, a.z, b.x, b.y - 200, b.z);
 }
 //change state with the upper and left arrow
 function keyPressed() {
   if (keyCode === UP_ARROW) {
-    state = state+1;
-    if (state == 4){
+    state = state + 1;
+    if (state == 4) {
       state = 0;
-      }
+    }
   }
   if (keyCode === LEFT_ARROW) {
-    state2 = state2+1;
-    if (state2 == 4){
+    state2 = state2 + 1;
+    if (state2 == 4) {
       state2 = 0;
-      }
+    }
   }
   return false;
 }
