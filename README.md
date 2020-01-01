@@ -1,6 +1,6 @@
 # "4D Cube Trip" - Sceneries
 
-- Fixed CSS linking in the html
+- Fixed CSS linking
 
 
 
